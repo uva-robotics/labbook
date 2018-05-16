@@ -1,0 +1,128 @@
+
+\chapter{Installation}
+\paragraph{Janne Spijkervet}
+
+Installation README: \url{https://gitlab.com/uva-robotics/uva-robotics}
+
+\paragraph{Uva Robotics}\label{uva-robotics}
+Repository for the development of intelligent systems for the UvA Intelligent Robotics Lab. Most programs use either ROS or our own Redis/Websockets stack as middleware. Below, you will find a basic installation tutorial to install all required dependencies. ROS runs on Python 2.7.
+
+\paragraph{Boilerplate package}\label{boilerplate-package}
+
+In the \url{https://gitlab.com/uva-robotics/\_boilerplate} respository, you will find a template for building your own ROS packages. It contains one meta-package folder and the package folder itself. We use meta-packages so that we don't get a lot of sub-repositories in our git directory. The boilerplate can be used for C++ and Python (2.7) code.
+
+\paragraph{ROS installation}\label{ros-installation}
+
+\paragraph{Add keys and update package manager}
+
+\begin{verbatim}
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo apt-get update
+\end{verbatim}
+
+\paragraph{Full install:}
+
+\begin{verbatim}
+sudo apt-get install ros-kinetic-desktop-full
+\end{verbatim}
+
+\paragraph{Minimum install:}
+
+\begin{verbatim}
+sudo apt-get install ros-kinetic-ros-base
+\end{verbatim}
+
+\paragraph{Initialize rosdep}
+
+\begin{verbatim}
+sudo rosdep init
+rosdep update
+\end{verbatim}
+
+\paragraph{Environment setup}
+
+\begin{verbatim}
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+\end{verbatim}
+
+\paragraph{Dependencies for building packages}
+
+\begin{verbatim}
+sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
+\end{verbatim}
+
+\paragraph{Installing ROS Pepper}\label{installing-ros-pepper}
+
+\begin{verbatim}
+sudo apt-get install ros-kinetic-pepper-.*
+\end{verbatim}
+
+Go into your workspace (e.g. \textasciitilde{}/projects/uva-robotics).\\
+Navigate to src directory (e.g. \textasciitilde{}/projects/uva-robotics/src).
+
+\begin{verbatim}
+git clone https://github.com/ros-naoqi/naoqi_driver.git
+rosdep install -i -y --from-paths ./naoqi_driver
+source /opt/ros/kinetic/setup.sh
+cd ../ && catkin_make
+\end{verbatim}
+
+\section{Running ROS}\label{running-ros}
+
+\paragraph{(Pepper example)}Run the following command to run roscore:
+
+\begin{verbatim}
+roscore
+\end{verbatim}
+
+\subsubsection{C++ version:}\label{c-version}
+
+\begin{verbatim}
+roslaunch pepper_bringup pepper_full.launch nao_ip:=<yourRobotIP> roscore_ip:=<roscore_ip> [network_interface:=<eth0|wlan0|vpn0>]
+\end{verbatim}
+
+\subsubsection{Python version:}\label{python-version}
+
+\begin{verbatim}
+roslaunch pepper_bringup pepper_full_py.launch nao_ip:=<yourRobotIP> roscore_ip:=<roscore_ip>
+\end{verbatim}
+
+\section{Using ROS}\label{using-ros}
+
+\paragraph{First, make sure you are running roscore in a seperate terminal.}
+
+\begin{verbatim}
+roscore
+\end{verbatim}
+
+\paragraph{List all running nodes:}
+
+\begin{verbatim}
+rosnode list
+\end{verbatim}
+
+\paragraph{List all topics:}
+
+\begin{verbatim}
+rostopic list
+\end{verbatim}
+
+\paragraph{View data from topic:}
+
+\begin{verbatim}
+rostopic echo <topic>
+\end{verbatim}
+
+\paragraph{Run a ROS package script:}
+
+\begin{verbatim}
+rosrun <package_name> <script_name>
+\end{verbatim}
+
+\paragraph{Run a ROS launch file:}
+
+\begin{verbatim}
+roslaunch <package_name> <launch_file_name>
+\end{verbatim}
