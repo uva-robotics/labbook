@@ -7,8 +7,22 @@
 Tim Müller joined the team. All packages needed to develop for the robots were installed on his computer.
 
 \paragraph{May 16, Janne Spijkervet}
+I wrote a set\_network.sh script for a multi-machine setup with ROS. Usage: source set\_network.sh <IP\_OF\_ROS\_CORE\_MACHINE>
+
+\paragraph{May 16, Janne Spijkervet}
 Chris Al Gerges, Mirka Schouten and Charlotte Kaandorp joined the team. I ran through all the installation instructions with them in the robotlab to make sure their computers were ready for developing in our framework (ROS) and the Pepper robot. I also gave them a quick introduction into publisher/subscriber node's topics, data structures and writing a first Hello World program for the Pepper robot (including an example with head/hand sensors).
 
 \paragraph{May 16, Janne Spijkervet}
 A new script has been added to the uva-robotics repository to run ROS with multiple machines. This involved setting the ROS\_MASTER\_URI, ROS\_IP environment variables to that of the ROS core machine and the child machine.
+
+\paragraph{May 18, Janne Spijkervet}
+ROS Hydro has been installed on one of the MBots (DHenk). Most sensors work again. There are still some problems with the voltage warning (and shutdown of the machine), but hopefully this will be solved when it gets a full charge.
+
+\paragraph{May 18, Janne Spijkervet}
+ROS has been compiled for the Pepper robot. It took a lot of time to make cross-compilation work. I used a docker implementation found on Github and tweaked the settings so it would work on our current Pepper/Naoqi/libqi version (2.5.5). I am planning to do the same for the Nao robots. I also wrote the pepper\_bringup.launch scripts so all nodes/topics will be available at startup.
+
+\paragraph{May 18, Janne Spijkervet}
+I created the slack\_ros package so we can easily communicate with our ROS robots through Slack. This can be found at \url{https://github.com/uva-robotics/slack_ros}.
+
+
 \bigskip
